@@ -10,7 +10,13 @@ export class ProductsRepository {
 		this.db = db;
 	}
 
-	public async findById(id: number): Promise<ProductRow | null> {
+	public async updateAvailable(id: number, available: number): Promise<void> 
+	{
+		await this.db.update(products).set({available}).where(eq(products.id, id));
+	}
+
+	public async findById(id: number): Promise<ProductRow | null> 
+	{
 		const row = await this.db.query.products.findFirst({
 			where: eq(products.id, id),
 		});

@@ -8,7 +8,12 @@ import {OrdersRepository} from '@/repositories/orders.repository.js';
 import {ProductsRepository} from '@/repositories/products.repository.js';
 import {OrdersManager} from '@/managers/orders.manager.js';
 import {ProductsManager} from '@/managers/products.manager.js';
-import { OrderService } from '@/orders/order.service';
+import { NormalProductHandler } from '@/domain/product/services/handlers/normal-product.handler.js';
+import { SeasonalProductHandler } from '@/domain/product/services/handlers/seasonal-product.handler.js';
+import { ExpirableProductHandler } from '@/domain/product/services/handlers/expirable-product.handler.js';
+import { ProductHandlerRegistry } from '@/domain/product/services/product-handler.registry.js';
+import { OrderService } from '@/orders/order.service.js';
+import {OrderController} from '@/controllers/order.controller.js';
 
 declare module '@fastify/awilix' {
 	interface Cradle { // eslint-disable-line @typescript-eslint/consistent-type-definitions
@@ -19,7 +24,12 @@ declare module '@fastify/awilix' {
 		productsRepository: ProductsRepository;
 		ordersManager: OrdersManager;
 		productsManager: ProductsManager;
-		OrderService: OrderService;
+		normalProductHandler: NormalProductHandler;
+		seasonalProductHandler: SeasonalProductHandler;
+		expirableProductHandler: ExpirableProductHandler;
+		productHandlerRegistry: ProductHandlerRegistry;
+		orderService: OrderService;
+		orderController: OrderController;
 	}
 }
 
